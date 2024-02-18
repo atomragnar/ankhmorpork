@@ -7,14 +7,6 @@ import (
 	"path/filepath"
 )
 
-//type Tree interface {
-//	Root() TreeNode
-//}
-
-// type NodeInterface interface {
-// 	Accept(visitor Visitor) error
-// }
-
 type Node struct {
 	Path     string
 	Info     SerializableFileInfo
@@ -46,8 +38,8 @@ func DecodeNode(data []byte) (*Node, error) {
 	return &node, nil
 }
 
-func (node *Node) Accept(visitor Visitor) error {
-	return visitor.Visit(*node)
+func (node *Node) Accept(visitor Visitor) {
+	visitor.Visit(*node)
 }
 
 func (node *Node) AddChild(child *Node) {

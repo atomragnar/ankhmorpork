@@ -1,18 +1,28 @@
 package filetree
 
 type Visitor interface {
-	Visit(node Node) error
+	Visit(node Node)
 }
 
-type TreeVisitor struct {
-	Root *Node
-}
+// example usage
+//
+// type TreeVisitor struct {
+// 	Root *Node
+// }
 
-func (v *TreeVisitor) Visit(node Node) error {
-	// ...
-	err := node.Accept(v)
-	if err != nil {
-		return err
-	}
-	return nil
-}
+// func NewTreeVisitor(node Node) *TreeVisitor {
+// 	visitor := &TreeVisitor{
+// 		Root: &node,
+// 	}
+
+// 	visitor.Visit(node)
+
+// 	return visitor
+// }
+
+// func (v *TreeVisitor) Visit(node Node) {
+// 	fmt.Println(node.Path)
+// 	for _, c := range node.Children {
+// 		c.Accept(v)
+// 	}
+// }
