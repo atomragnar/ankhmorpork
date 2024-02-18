@@ -1,4 +1,4 @@
-package filetree // Path: github.com/atomragnar/vetinari/pkg/filetree
+package filetree
 
 import (
 	"bytes"

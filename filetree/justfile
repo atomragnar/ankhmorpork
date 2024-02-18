@@ -1,0 +1,40 @@
+# print available targets
+default:
+    @just --list --justfile {{justfile()}}
+
+# evaluate and print all just variables
+evaluate:
+    @just --evaluate
+
+bin_dir := "../bin"
+golangci_lint_exe := "../bin/golangci-lint"
+
+# Recipes
+@bin-directory:
+    # Check if the bin directory exists, if not, create it
+    if [ ! -d {{bin_dir}} ]; then \
+        echo "Creating bin directory..."; \
+        mkdir -p ${bin_dir}; \
+    fi
+
+@golangci-lint: bin-directory
+    # Check if golangci-lint is installed, if not, install it
+    if [ ! -f {{golangci_lint_exe}} ]; then \
+        echo "Installing golangci-lint..."; \
+        curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ./bin v1.55.2; \
+    fi
+
+
+lint: golangci-lint
+    # Running linting
+    echo "Running golangci-lint..."
+    {{golangci_lint_exe}} run --verbose
+
+
+installed-go-tools:
+    go list -m -u -json all
+
+
+format:
+    @echo "Formatting source code ..."
+    gofmt -l -s -w .
