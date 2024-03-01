@@ -1,3 +1,3 @@
-module github.com/atomrangar/ankh-morpork
+module github.com/atomragnar/ankh-morpork
 
 go 1.22.0
